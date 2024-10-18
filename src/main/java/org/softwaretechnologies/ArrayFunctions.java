@@ -11,7 +11,7 @@ public final class ArrayFunctions {
      */
     public static void reverse(int[] array) {
         int size = array.length;
-        int n = size;
+        int n = size-1;
         for(int i = 0; i< size/2; i++){
             int j = array[i];
             array[i] = array[n];
@@ -36,11 +36,12 @@ public final class ArrayFunctions {
      */
     public static void rotateMatrix(int[][] matrix) {
         int size = matrix.length;
-        for(int i = 0 ; i<size; i++){
-            for(int g = 0; g<size/2;g++){
-                int j = matrix[i][g];
-                matrix[i][g] = matrix[g][i];
-                matrix[g][i]= j;
+
+        for (int i = 0; i < size ; i++) {
+            for (int g = 0; g < i; g++) {
+                int j = matrix[g][i];
+                matrix[g][i] = matrix[i][g];
+                matrix[i][g] = j;
 
             }
         }
