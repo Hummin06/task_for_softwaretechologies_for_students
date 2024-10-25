@@ -26,9 +26,17 @@ public class Money {
      */
     @Override
     public boolean equals(Object o) {
-        // TODO: реализуйте вышеуказанную функцию
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
-        return false;
+        Money money = (Money) o;
+
+        if (type != money.type) return false;
+
+        BigDecimal thisAmount = amount == null ? BigDecimal.ZERO : amount.setScale(4, RoundingMode.HALF_UP);
+        BigDecimal otherAmount = money.amount == null ? BigDecimal.ZERO : money.amount.setScale(4, RoundingMode.HALF_UP);
+
+        return thisAmount.equals(otherAmount);
     }
 
     /**
@@ -48,11 +56,33 @@ public class Money {
      */
     @Override
     public int hashCode() {
-        // TODO: реализуйте вышеуказанную функцию
+        int hashMultiplier = 0;
 
+        if (type != null)
+        {
+            hashMultiplier = type.ordinal();
+            /*switch (type)
+            {
+                case USD: hashMultiplier = 1; break;
+                case EURO: hashMultiplier = 2; break;
+                case RUB: hashMultiplier = 3; break;
+                case KRONA: hashMultiplier = 4; break;
+                default: hashMultiplier = 5; break;
+            }*/
+        } else
+        {
+            hashMultiplier = 5;
+        }
 
-        Random random = new Random();
-        return random.nextInt();
+        BigDecimal scaledAmount = (amount == null ? BigDecimal.ZERO : amount.setScale(4, RoundingMode.HALF_UP));
+        long amountAsLong = scaledAmount.multiply(BigDecimal.valueOf(10000)).longValue();
+
+        if (amountAsLong >= (MAX_VALUE - hashMultiplier))
+        {
+            return MAX_VALUE;
+        }
+
+        return (int) amountAsLong + hashMultiplier;
     }
 
     /**
@@ -74,9 +104,22 @@ public class Money {
      */
     @Override
     public String toString() {
-        // TODO: реализуйте вышеуказанную функцию
-        String str = type.toString()+": "+amount.setScale(4, RoundingMode.HALF_UP).toString();
-        return str;
+        if (type == null && amount == null)
+        {
+            return "null: null";
+        }
+        else if (type == null)
+        {
+            return "null: " + amount.setScale(4, RoundingMode.HALF_UP);
+        }
+        else if (amount == null)
+        {
+            return type + ": null";
+        }
+        else
+        {
+            return type + ": " + amount.setScale(4, RoundingMode.HALF_UP);
+        }
     }
 
     public BigDecimal getAmount() {
