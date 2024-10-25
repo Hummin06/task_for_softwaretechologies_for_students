@@ -61,14 +61,7 @@ public class Money {
         if (type != null)
         {
             hashMultiplier = type.ordinal();
-            /*switch (type)
-            {
-                case USD: hashMultiplier = 1; break;
-                case EURO: hashMultiplier = 2; break;
-                case RUB: hashMultiplier = 3; break;
-                case KRONA: hashMultiplier = 4; break;
-                default: hashMultiplier = 5; break;
-            }*/
+
         } else
         {
             hashMultiplier = 5;
