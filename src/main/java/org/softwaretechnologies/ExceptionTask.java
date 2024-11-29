@@ -9,6 +9,7 @@ public class ExceptionTask {
        Вызвана функция printMessage
      */
     public static void printMessage() {
+        System.out.println("Вызвана функция printMessage");
         throwRuntimeException();
         // TODO: реализуйте вышеуказанную функцию
 
@@ -20,6 +21,7 @@ public class ExceptionTask {
      Вызвана функция printMessage2
      */
     public static void printMessage2() throws Exception {
+        System.out.println("Вызвана функция printMessage2");
         throwCatchableException();
         // TODO: реализуйте вышеуказанную функцию
     }
@@ -42,7 +44,12 @@ public class ExceptionTask {
     public static int divide(int dividend, int divisor) throws DivideOnNullException {
 
         // TODO: реализуйте вышеуказанную функцию
-        return dividend/divisor;
+        if (divisor == 0)
+        {
+            throw new DivideOnNullException();
+        }
+
+        return dividend / divisor;
     }
 
     /**
@@ -59,6 +66,22 @@ public class ExceptionTask {
 
 
 
+        if (first == null && second == null)
+        {
+            return Optional.empty();
+        }
+
+        if (first == null)
+        {
+            return Optional.of(second);
+        }
+
+        if (second == null)
+        {
+            return Optional.of(first);
+        }
+
         return Optional.of(first.length() > second.length() ? first + second : second + first);
+
     }
 }
