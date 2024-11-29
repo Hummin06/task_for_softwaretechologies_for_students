@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Zoo {
     private final List<Animal> animalList = new ArrayList<>();
@@ -36,7 +37,7 @@ public class Zoo {
         List<String> sounds = new ArrayList<>();
         // TODO заполните корректно список звуков
 
-        return sounds;
+        return animalList.stream().sorted(Comparator.comparing(Animal::getName)).map(Animal::sound).collect(Collectors.toList());
     }
 
 
