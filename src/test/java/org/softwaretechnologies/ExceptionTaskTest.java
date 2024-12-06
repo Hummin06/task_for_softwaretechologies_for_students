@@ -28,21 +28,16 @@ class ExceptionTaskTest {
 
     @Test
     void printMessage() {
-        ExceptionTask.printMessage();
+        assertThrows(RuntimeException.class, ExceptionTask::printMessage);
         String s = outContent.toString();
         assertEquals("Вызвана функция printMessage" + System.lineSeparator(), s);
     }
 
     @Test
     void printMessage2() {
-        try {
-            ExceptionTask.printMessage2();
-            String s = outContent.toString();
-            assertEquals("Вызвана функция printMessage2" + System.lineSeparator(), s);
-        } catch (Exception e) {
-            fail();
-            throw new RuntimeException(e);
-        }
+        assertThrows(Exception.class, ExceptionTask::printMessage2);
+        String s = outContent.toString();
+        assertEquals("Вызвана функция printMessage2" + System.lineSeparator(), s);
     }
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
